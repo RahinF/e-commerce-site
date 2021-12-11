@@ -1,11 +1,11 @@
 import { Content } from "../responsive";
 
-const Dashboard = () => {
+const Wishlist = () => {
   return (
     <Content>
-      <h1>dashboard</h1>
+      <h1>Wishlist</h1>
     </Content>
   );
 };
 
-export default Dashboard;
+export default Wishlist;

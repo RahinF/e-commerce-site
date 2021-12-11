@@ -1,17 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadCart } from "./cart.thunk";
+import { clearCart, createCart, loadCart, updateCart } from "./cart.thunk";
 
 const cart = createSlice({
   name: "cart",
   initialState: {
     isLoading: false,
-    data: null,
+    data: [],
+    quantity: 0,
+    total: 0
   },
-  reducers: {},
+  reducers: {
+    addProduct: (state, action) => {
+      state.data.push(action.payload);
+      state.total += action.payload.product.price * action.payload.quantity;
+      state.quantity += 1;
+    }
+  },
   extraReducers: {
+    [createCart.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    },
+    [createCart.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [createCart.rejected]: (state) => {
+      state.isLoading = false;
+    },
+
+    [updateCart.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    },
+    [updateCart.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateCart.rejected]: (state) => {
+      state.isLoading = false;
+    },
+
     [loadCart.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      state.quantity = action.payload.products.length; 
     },
     [loadCart.pending]: (state) => {
       state.isLoading = true;
@@ -19,7 +50,19 @@ const cart = createSlice({
     [loadCart.rejected]: (state) => {
       state.isLoading = false;
     },
+
+    [clearCart.fulfilled]: (state) => {
+      state.isLoading = false;
+      state.data = null;
+    },
+    [clearCart.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [clearCart.rejected]: (state) => {
+      state.isLoading = false;
+    },
   },
 });
 
+export const { addProduct } = cart.actions;
 export default cart.reducer;

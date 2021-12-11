@@ -1,4 +1,4 @@
-export const linkData = [
+export const data = [
   {
     title: "shirts",
     url: "/products/shirts",

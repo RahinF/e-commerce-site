@@ -2,17 +2,10 @@ import { useState } from "react";
 import Newsletter from "../../components/Newsletter";
 import { Content } from "../../responsive";
 import { useParams } from "react-router";
-import Products from "../../components/Products";
-import {
-  Container,
-  FilterContainer,
-  FilterItem,
-  FilterTitle,
-  Left,
-  Option,
-  Right,
-  Select,
-} from "./ProductList.style";
+import Products from "../../components/Products/Products";
+import { Container, FilterContainer, Left, Right } from "./ProductList.style";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { colors, sizes } from "./data";
 
 const ProductList = () => {
   const { category } = useParams();
@@ -30,37 +23,52 @@ const ProductList = () => {
         <h1>{category}</h1>
         <FilterContainer>
           <Left>
-            <FilterItem>
-              <FilterTitle>Color:</FilterTitle>
-              <Select name="color" onChange={handleFilters}>
-                <Option>red</Option>
-                <Option>blue</Option>
-                <Option>green</Option>
-                <Option>yellow</Option>
-                <Option>purple</Option>
+            <FormControl sx={{ minWidth: 120 }}>
+              <InputLabel>Color</InputLabel>
+              <Select
+                label="color"
+                name="color"
+                onChange={handleFilters}
+                value={filters.color || ""}
+              >
+                {colors.map((color) => (
+                  <MenuItem key={color} value={color}>
+                    {color}
+                  </MenuItem>
+                ))}
               </Select>
-            </FilterItem>
-            <FilterItem>
-              <FilterTitle>Size:</FilterTitle>
-              <Select name="size" onChange={handleFilters}>
-                <Option>xs</Option>
-                <Option>s</Option>
-                <Option>m</Option>
-                <Option>l</Option>
-                <Option>xl</Option>
+            </FormControl>
+
+            <FormControl sx={{ minWidth: 120 }}>
+              <InputLabel>Size</InputLabel>
+              <Select
+                name="size"
+                onChange={handleFilters}
+                label="size"
+                value={filters.size || ""}
+              >
+                {sizes.map((size) => (
+                  <MenuItem key={size} value={size}>
+                    {size}
+                  </MenuItem>
+                ))}
               </Select>
-            </FilterItem>
+            </FormControl>
           </Left>
 
           <Right>
-            <FilterItem>
-              <FilterTitle>Sort:</FilterTitle>
-              <Select onChange={(e) => setSort(e.target.value)}>
-                <Option value="latest">Latest</Option>
-                <Option value="asc">Price (asc)</Option>
-                <Option value="desc">Price (desc)</Option>
+            <FormControl sx={{ minWidth: 120 }}>
+              <InputLabel>Sort</InputLabel>
+              <Select
+                onChange={(e) => setSort(e.target.value)}
+                label="sort"
+                value={sort}
+              >
+                <MenuItem value="latest">Latest</MenuItem>
+                <MenuItem value="asc">Price (asc)</MenuItem>
+                <MenuItem value="desc">Price (desc)</MenuItem>
               </Select>
-            </FilterItem>
+            </FormControl>
           </Right>
         </FilterContainer>
         <Products category={category} filters={filters} sort={sort} />

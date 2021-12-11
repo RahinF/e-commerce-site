@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { breakpoints } from "../responsive.js";
-import { useReducer } from "react";
+import WishlistButton from "./WishlistButton.jsx";
 
 const ProductLink = styled(Link)`
   text-decoration: none;
@@ -49,19 +48,7 @@ const Image = styled.img`
   max-width: 100%;
 `;
 
-const Button = styled.div`
-  display: flex;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-
 export const Product = ({ product }) => {
-  const [checked, toggle] = useReducer((checked) => !checked, false);
-
   return (
     <Container>
       <ProductLink to={`/product/${product._id}`}>
@@ -73,9 +60,8 @@ export const Product = ({ product }) => {
 
       <Info>
         <Price>${product.price.toFixed(2)}</Price>
-        <Button onClick={toggle}>
-          {checked ? <Favorite /> : <FavoriteBorder />}
-        </Button>
+
+        <WishlistButton id={product._id} />
       </Info>
     </Container>
   );

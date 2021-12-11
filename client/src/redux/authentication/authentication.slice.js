@@ -8,7 +8,11 @@ const auth = createSlice({
     data: null,
     error: { login: null, register: null },
   },
-  reducers: {},
+  reducers: {
+    setUser(state, action) {
+      state.data = action.payload;
+    },
+  },
   extraReducers: {
     [loginUser.fulfilled]: (state, action) => {
       state.isLoading = false;
@@ -37,4 +41,5 @@ const auth = createSlice({
   },
 });
 
+export const { setUser } = auth.actions
 export default auth.reducer;

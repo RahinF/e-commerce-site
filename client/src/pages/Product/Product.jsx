@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProduct } from "../../redux/product/product.thunk";
+import { getUser } from "../../redux/authentication/authentication.selector";
 import {
   getProduct,
   getProductLoading,
@@ -12,6 +13,9 @@ import Button from "../../components/Button";
 import {
   Arrow,
   Category,
+  ColorBlockInner,
+  ColorBlockOuter,
+  List,
   Container,
   Description,
   Image,
@@ -21,12 +25,23 @@ import {
   QuantityContainer,
   QuantityValue,
   Title,
+  SizeItem,
+  ButtonContainer,
 } from "./Product.style";
+import { createCart, updateCart } from "../../redux/cart/cart.thunk";
+import { addProduct } from "../../redux/cart/cart.slice";
+import { getCart } from "../../redux/cart/cart.selector";
+import WishlistButton from "../../components/WishlistButton";
 
 const Product = () => {
   const product = useSelector(getProduct);
+
+  const cart = useSelector(getCart);
+  const user = useSelector(getUser);
   const isLoading = useSelector(getProductLoading);
   const [quantity, setQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
 
   const dispatch = useDispatch();
 
@@ -40,13 +55,37 @@ const Product = () => {
     }
   };
 
+  const addToCart = () => {
+    // dispatch(
+    //   addProduct({
+    //     product,
+    //     quantity,
+    //     color: selectedColor,
+    //     size: selectedSize,
+    //   })
+    // );
+
+    if (cart.cartId) {
+      const item = {
+        cartId: cart.cartId,
+        product: {
+          productId: product._id,
+          quantity,
+          color: selectedColor,
+          size: selectedSize,
+        },
+      };
+      dispatch(updateCart(item));
+    }
+  };
+
   useEffect(() => {
     dispatch(loadProduct(id));
   }, [dispatch, id]);
 
-  return isLoading ? (
-    <div>Loading</div>
-  ) : (
+  const loading = <div>Loading</div>;
+
+  const component = (
     <Container>
       <ImageContainer>
         <Image src={product?.image} alt={product?.title} />
@@ -59,6 +98,36 @@ const Product = () => {
         <Description>{product?.description}</Description>
         <Price>${product?.price.toFixed(2)}</Price>
 
+        <div>
+          <h3>Size: {selectedSize}</h3>
+          <List>
+            {product?.size.map((size) => (
+              <SizeItem
+                key={size}
+                selected={selectedSize === size}
+                onClick={() => setSelectedSize(size)}
+              >
+                {size}
+              </SizeItem>
+            ))}
+          </List>
+        </div>
+
+        <div>
+          <h3>Color: {selectedColor}</h3>
+          <List>
+            {product?.color.map((color) => (
+              <ColorBlockOuter
+                key={color}
+                selected={selectedColor === color}
+                onClick={() => setSelectedColor(color)}
+              >
+                <ColorBlockInner background={color} />
+              </ColorBlockOuter>
+            ))}
+          </List>
+        </div>
+
         <QuantityContainer>
           <Arrow onClick={() => modifyQuantity("increase")}>
             <Add />
@@ -69,10 +138,17 @@ const Product = () => {
           </Arrow>
         </QuantityContainer>
 
-        <Button filled>Add to Cart</Button>
+        <ButtonContainer>
+        <Button filled onClick={addToCart} disabled={!selectedColor || !selectedSize}>
+          Add to Cart
+        </Button>
+        <WishlistButton id={product?._id} />
+        </ButtonContainer>
       </InfoContainer>
     </Container>
   );
+
+  return isLoading ? loading : component;
 };
 
 export default Product;

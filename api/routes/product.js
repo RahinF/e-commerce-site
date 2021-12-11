@@ -55,12 +55,12 @@ productRoute.get("/find/:id", async (req, res) => {
 // GET ALL PRODUCTS
 productRoute.get("/", async (req, res) => {
   try {
-  const queryNew = req.query.new;
+  const queryLatest = req.query.latest;
   const queryCategory = req.query.category;
 
   let products;
 
-  if(queryNew){
+  if(queryLatest){
     products = await Product.find().sort({createdAt: -1}).limit(5);
   }
 

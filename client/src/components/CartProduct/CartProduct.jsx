@@ -38,7 +38,7 @@ user size
         <p>{id}</p>
         <Title>{title}</Title>
         {categories.map((category) => (
-          <p>{category}</p>
+          <p key={category}>{category}</p>
         ))}
       </Info>
       <QuantityContainer>

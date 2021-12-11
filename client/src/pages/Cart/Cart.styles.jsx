@@ -14,11 +14,6 @@ export const Top = styled.div`
   padding: 0 1rem;
 `;
 
-export const TopTextContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-export const TopText = styled.h3``;
 
 export const Bottom = styled.div`
   margin-top: 2.5rem;

@@ -5,7 +5,7 @@ const products = createSlice({
     name: "products",
     initialState: {
       isLoading: false,
-      data: null,
+      data: [],
     },
     reducers: {},
     extraReducers: {
@@ -16,9 +16,8 @@ const products = createSlice({
       [loadProducts.pending]: (state) => {
         state.isLoading = true;
       },
-      [loadProducts.rejected]: (state, action) => {
+      [loadProducts.rejected]: (state) => {
         state.isLoading = false;
-        console.log(action.payload)
       }
     },
 });

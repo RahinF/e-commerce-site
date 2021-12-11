@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import { Content } from "../../responsive";
 import { getUser } from "../../redux/authentication/authentication.selector";
 import { useEffect } from "react";
-import { loadCart } from "../../redux/cart/cart.thunk";
+import { clearCart, loadCart } from "../../redux/cart/cart.thunk";
 import { getCart, getCartLoading } from "../../redux/cart/cart.selector";
 import {
   Bottom,
@@ -18,8 +18,6 @@ import {
   SummaryTitle,
   Title,
   Top,
-  TopText,
-  TopTextContainer,
 } from "./Cart.styles";
 
 const Cart = () => {
@@ -29,14 +27,14 @@ const Cart = () => {
   const user = useSelector(getUser);
 
   useEffect(() => {
-    // todo
-
-    // if logged in load from db
-    // if anon load from localStorage
-
-
     user && dispatch(loadCart(user._id));
   }, [dispatch, user]);
+
+  const emptyCart = () => {
+    if (user) {
+      dispatch(clearCart(cart.id));
+    }
+  };
 
   const loading = <div>loading...</div>;
   const component = (
@@ -45,15 +43,12 @@ const Cart = () => {
         <Title>cart</Title>
         <Top>
           <Button>Continue Shopping</Button>
-          <TopTextContainer>
-            <TopText>shopping cart (0)</TopText>
-            <TopText>wishlist (0)</TopText>
-          </TopTextContainer>
+          <Button onClick={emptyCart}>Clear Cart</Button>
         </Top>
 
         <Bottom>
           <Info>
-            {cart?.map((product) => (
+            {cart.products?.map((product) => (
               <CartProduct key={product.data._id} product={product} />
             ))}
           </Info>

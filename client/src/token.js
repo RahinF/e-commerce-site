@@ -1,3 +1,7 @@
-export const getToken = () => {
-  return localStorage.getItem("token");
-};
+import jwt from "jsonwebtoken";
+
+export const getToken = () => localStorage.getItem("token");
+
+
+export const decodeToken = (token) =>  jwt.decode(token);
+

@@ -33,7 +33,7 @@ export const Price = styled.p`
 `;
 
 export const ImageContainer = styled.div`
-  flex: 1;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,8 +50,6 @@ export const Category = styled.p`
   color: gray;
 `;
 
-export const RatingCount = styled.p``;
-
 export const QuantityContainer = styled.div`
   display: flex;
   align-items: center;
@@ -61,4 +59,46 @@ export const QuantityContainer = styled.div`
 
 export const QuantityValue = styled.p`
   font-size: 1.5rem;
+`;
+
+export const List = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+export const SizeItem = styled.div`
+  border: 1px solid lightgrey;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-color: ${({ selected }) => selected && `black`};
+`;
+
+export const ColorBlockOuter = styled.div`
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  border: ${({ selected }) => selected && `1px solid black`};
+`;
+
+export const ColorBlockInner = styled.div`
+  background: ${({ background }) => background};
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin: 0.2rem;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 `;

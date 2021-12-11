@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Cart from "../pages/Cart/Cart";
+import Wishlist from "../pages/Wishlist";
 import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
 import PageNotFound from "../pages/PageNotFound";
@@ -16,7 +17,8 @@ const Routes = () => {
       <Route path="/" exact component={Home} />
       <Route path="/products/:category" component={ProductList} />
       <Route path="/product/:id" component={Product} />
-      <Route path="/cart" exact component={Cart} />
+      <Route path="/wishlist" component={Wishlist} />
+      <Route path="/cart" component={Cart} />
 
       <PublicRoute path="/login">
         <Login />

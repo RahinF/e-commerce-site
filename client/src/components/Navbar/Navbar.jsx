@@ -1,70 +1,31 @@
 import { Link } from "react-router-dom";
-import { linkData } from "./linkData";
-import styled from "styled-components";
+import { data } from "./linkData";
 import {
   FavoriteBorder,
   PersonOutline,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import Button from "../Button";
-import { Content } from "../../responsive";
 import { useSelector } from "react-redux";
 import { getUser } from "../../redux/authentication/authentication.selector";
-
-const Container = styled.header``;
-const Wrapper = styled(Content)`
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-`;
-
-const Left = styled.div`
-  flex: 1;
-  display: flex;
-`;
-
-const Logo = styled.h1`
-  text-transform: uppercase;
-  text-align: center;
-  margin: 0;
-`;
-
-const Center = styled.div`
-  flex: 1;
-`;
-const Nav = styled.nav`
-  padding: 0.5rem;
-  display: flex;
-`;
-
-const LinkContainer = styled.ul`
-  padding: 0;
-  display: flex;
-  width: 50%;
-  margin: auto;
-  justify-content: space-around;
-`;
-
-const LinkItem = styled.li`
-  list-style: none;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
-
-const Right = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-`;
+import {
+  Center,
+  Container,
+  Left,
+  LinkContainer,
+  LinkItem,
+  Logo,
+  Nav,
+  Right,
+  StyledLink,
+  Wrapper,
+} from "./Navbar.style";
+import { getCartQuantity } from "../../redux/cart/cart.selector";
 
 const Navbar = () => {
   const loggedIn = useSelector(getUser);
+  const cartQuantity = useSelector(getCartQuantity);
 
   return (
     <Container>
@@ -77,7 +38,7 @@ const Navbar = () => {
         <Center>
           <Nav>
             <LinkContainer>
-              {linkData.map(({ url, title }) => (
+              {data.map(({ url, title }) => (
                 <LinkItem key={title}>
                   <StyledLink to={url}>{title}</StyledLink>
                 </LinkItem>
@@ -104,13 +65,17 @@ const Navbar = () => {
             </>
           )}
 
-          <IconButton>
-            <FavoriteBorder />
-          </IconButton>
+          <Link to="/wishlist">
+            <IconButton>
+              <FavoriteBorder />
+            </IconButton>
+          </Link>
 
           <Link to="/cart">
             <IconButton>
-              <ShoppingCartOutlined />
+              <Badge color="secondary" badgeContent={cartQuantity}>
+                <ShoppingCartOutlined />
+              </Badge>
             </IconButton>
           </Link>
         </Right>
