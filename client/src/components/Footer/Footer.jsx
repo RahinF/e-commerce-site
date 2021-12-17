@@ -21,17 +21,16 @@ import {
   SocialIcon,
   Title,
 } from "./Footer.style";
+import Newsletter from "../Newsletter";
 
 const Footer = () => {
   return (
     <footer>
       <Container>
         <Left>
-          <Logo>Takt.</Logo>
+        <Newsletter />
           <Description>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Perspiciatis nam ipsa quod. Placeat, impedit labore nostrum at magni
-            laudantium delectus?
+           
           </Description>
           <SocialContainer>
             <SocialIcon backgroundColor="#4267B2">
@@ -44,6 +43,7 @@ const Footer = () => {
               <Twitter />
             </SocialIcon>
           </SocialContainer>
+          
         </Left>
         <Center>
           <Title>Useful Links</Title>

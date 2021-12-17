@@ -2,8 +2,10 @@ import { Add, Remove } from "@mui/icons-material";
 import { Arrow, Container, Image, ImageContainer, Info, Price, QuantityContainer, QuantityValue, Title } from "./CartProduct.style";
 
 export const CartProduct = ({ product }) => {
-  const { title, image, price, _id: id, categories } = product.data;
+  const { title, image, price, _id: id, categories } = product.product;
   const quantity = product.quantity;
+
+  
 
   /*
 

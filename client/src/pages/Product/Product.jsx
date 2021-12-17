@@ -56,27 +56,27 @@ const Product = () => {
   };
 
   const addToCart = () => {
-    // dispatch(
-    //   addProduct({
-    //     product,
-    //     quantity,
-    //     color: selectedColor,
-    //     size: selectedSize,
-    //   })
-    // );
+    dispatch(
+      addProduct({
+        product,
+        quantity,
+        color: selectedColor,
+        size: selectedSize,
+      })
+    );
 
-    if (cart.cartId) {
-      const item = {
-        cartId: cart.cartId,
-        product: {
-          productId: product._id,
-          quantity,
-          color: selectedColor,
-          size: selectedSize,
-        },
-      };
-      dispatch(updateCart(item));
-    }
+    // if (cart.cartId) {
+    //   const item = {
+    //     cartId: cart.cartId,
+    //     product: {
+    //       productId: product._id,
+    //       quantity,
+    //       color: selectedColor,
+    //       size: selectedSize,
+    //     },
+    //   };
+    //   dispatch(updateCart(item));
+    // }
   };
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const Product = () => {
         <Price>${product?.price.toFixed(2)}</Price>
 
         <div>
-          <h3>Size: {selectedSize}</h3>
+          <p>Size  —  {selectedSize}</p>
           <List>
             {product?.size.map((size) => (
               <SizeItem
@@ -114,7 +114,7 @@ const Product = () => {
         </div>
 
         <div>
-          <h3>Color: {selectedColor}</h3>
+          <p>Color  —  {selectedColor}</p>
           <List>
             {product?.color.map((color) => (
               <ColorBlockOuter

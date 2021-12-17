@@ -48,6 +48,10 @@ const Button = styled.button`
       width: 100%;
     }
   }
+
+  &:disabled {
+    background-color: grey;
+  }
 `;
 
 Button.defaultProps = {

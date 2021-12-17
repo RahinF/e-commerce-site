@@ -1,27 +1,13 @@
 import { Send } from "@mui/icons-material";
 import { useState } from "react";
 import styled from "styled-components";
-import { Content, media } from "../responsive";
 import Button from "./Button";
 
-const Container = styled.div`
-  background-color: aliceblue;
-`;
-
-const ContentContainer = styled(Content)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: fit-content;
-  padding: 2rem 1rem;
-`;
+const Container = styled.div``;
 
 const InputContainer = styled.div`
   display: flex;
   border: 1px solid transparent;
-
-  ${media("md", { width: "50%" })}
   transition: 0.25s ease;
 
   &:focus-within {
@@ -44,18 +30,13 @@ const Input = styled.input`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 3rem;
-  margin-top: 0;
-`;
-
-const Description = styled.p`
+const Title = styled.h5`
+  font-size: 1.5rem;
   margin: 0;
 `;
 
 const ErrorMessage = styled.p`
   color: red;
-  height: 1rem;
 `;
 
 const Newsletter = () => {
@@ -74,26 +55,24 @@ const Newsletter = () => {
 
   return (
     <Container>
-      <ContentContainer>
-        <Title>Newsletter</Title>
-        <Description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-          facere! Eum, nobis laborum! Optio, eligendi!
-        </Description>
-        <ErrorMessage>{error}</ErrorMessage>
+      <Title>Sign up for Newsletter</Title>
+      <p>
+        We will let you know when we have new arrivals, events and promo's don't
+        worry we send them infrequently, just a friendly hi now and again!
+      </p>
+      <ErrorMessage>{error}</ErrorMessage>
 
-        <InputContainer>
-          <Input
-            type="email"
-            placeholder="Your Email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <Button filled onClick={onSubmit}>
-            <Send />
-          </Button>
-        </InputContainer>
-      </ContentContainer>
+      <InputContainer>
+        <Input
+          type="email"
+          placeholder="Your Email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
+        <Button filled onClick={onSubmit}>
+          <Send />
+        </Button>
+      </InputContainer>
     </Container>
   );
 };

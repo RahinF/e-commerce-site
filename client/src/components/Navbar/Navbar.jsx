@@ -22,10 +22,12 @@ import {
   Wrapper,
 } from "./Navbar.style";
 import { getCartQuantity } from "../../redux/cart/cart.selector";
+import { getWishlistQuantity } from "../../redux/wishlist/wishlist.selector";
 
 const Navbar = () => {
   const loggedIn = useSelector(getUser);
   const cartQuantity = useSelector(getCartQuantity);
+  const wishlistQuantity = useSelector(getWishlistQuantity);
 
   return (
     <Container>
@@ -67,7 +69,9 @@ const Navbar = () => {
 
           <Link to="/wishlist">
             <IconButton>
-              <FavoriteBorder />
+              <Badge color="secondary" badgeContent={wishlistQuantity}>
+                <FavoriteBorder />
+              </Badge>
             </IconButton>
           </Link>
 

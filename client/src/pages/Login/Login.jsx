@@ -14,7 +14,7 @@ import {
   Form,
   Title,
   Wrapper,
-} from "./Login.styles";
+} from "./Login.style";
 
 
 const Login = () => {

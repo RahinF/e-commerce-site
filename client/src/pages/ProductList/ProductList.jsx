@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Newsletter from "../../components/Newsletter";
-import { Content } from "../../responsive";
 import { useParams } from "react-router";
 import Products from "../../components/Products/Products";
 import { Container, FilterContainer, Left, Right } from "./ProductList.style";
@@ -19,7 +17,7 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Content>
+     
         <h1>{category}</h1>
         <FilterContainer>
           <Left>
@@ -72,8 +70,8 @@ const ProductList = () => {
           </Right>
         </FilterContainer>
         <Products category={category} filters={filters} sort={sort} />
-      </Content>
-      <Newsletter />
+     
+     
     </Container>
   );
 };

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Content, media } from "../../responsive";
+import { media } from "../../responsive";
 import Button from "../../components/Button";
 
-export const Container = styled(Content)`
+export const Container = styled.div`
   ${media("md", { display: "flex", padding: "3rem 0" })}
   padding: 3rem 1rem;
   gap: 1rem;

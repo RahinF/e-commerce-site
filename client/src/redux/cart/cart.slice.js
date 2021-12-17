@@ -1,20 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { clearCart, createCart, loadCart, updateCart } from "./cart.thunk";
 
+const initialState = {
+  isLoading: false,
+  data: [],
+  quantity: 0,
+  total: 0
+};
+
 const cart = createSlice({
   name: "cart",
-  initialState: {
-    isLoading: false,
-    data: [],
-    quantity: 0,
-    total: 0
-  },
+  initialState: initialState,
   reducers: {
     addProduct: (state, action) => {
       state.data.push(action.payload);
       state.total += action.payload.product.price * action.payload.quantity;
       state.quantity += 1;
-    }
+    },
+
+    clear: () => initialState
+
   },
   extraReducers: {
     [createCart.fulfilled]: (state, action) => {
@@ -64,5 +69,5 @@ const cart = createSlice({
   },
 });
 
-export const { addProduct } = cart.actions;
+export const { addProduct, clear } = cart.actions;
 export default cart.reducer;

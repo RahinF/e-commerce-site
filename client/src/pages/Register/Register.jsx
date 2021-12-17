@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import FormInput from "../../components/FormInput";
 import {  registerUser } from "../../redux/authentication/authentication.thunk";
 import { getRegisterError } from "../../redux/authentication/authentication.selector";
-import { Container, Form, Title, Wrapper } from "./Register.styles";
+import { Container, Form, Title, Wrapper } from "./Register.style";
 
 
 

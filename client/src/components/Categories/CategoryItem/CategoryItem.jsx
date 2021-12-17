@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Button from "../../Button";
 import { Container, Content, Image, Title } from "./CategoryItem.style";
 
 const CategoryItem = ({ item }) => {
@@ -11,9 +10,6 @@ const CategoryItem = ({ item }) => {
         <Image src={image} />
         <Content>
           <Title>{title}</Title>
-          <Button filled size="lg">
-            Shop Now
-          </Button>
         </Content>
       </Link>
     </Container>

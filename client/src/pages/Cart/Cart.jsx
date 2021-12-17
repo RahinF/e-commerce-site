@@ -1,11 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { CartProduct } from "../../components/CartProduct/CartProduct";
 import Button from "../../components/Button";
-import { Content } from "../../responsive";
-import { getUser } from "../../redux/authentication/authentication.selector";
-import { useEffect } from "react";
-import { clearCart, loadCart } from "../../redux/cart/cart.thunk";
+
 import { getCart, getCartLoading } from "../../redux/cart/cart.selector";
 import {
   Bottom,
@@ -18,40 +14,31 @@ import {
   SummaryTitle,
   Title,
   Top,
-} from "./Cart.styles";
+} from "./Cart.style";
+import { clear } from "../../redux/cart/cart.slice";
 
 const Cart = () => {
   const cart = useSelector(getCart);
   const isLoading = useSelector(getCartLoading);
   const dispatch = useDispatch();
-  const user = useSelector(getUser);
 
-  useEffect(() => {
-    user && dispatch(loadCart(user._id));
-  }, [dispatch, user]);
+  const cartItems = cart.map((item) => (
+    <CartProduct key={item.product._id} product={item} />
+  ));
 
-  const emptyCart = () => {
-    if (user) {
-      dispatch(clearCart(cart.id));
-    }
-  };
-
+  const emptyCart = <div>cart is empty</div>;
   const loading = <div>loading...</div>;
   const component = (
     <Container>
-      <Content>
+      
         <Title>cart</Title>
         <Top>
           <Button>Continue Shopping</Button>
-          <Button onClick={emptyCart}>Clear Cart</Button>
+          <Button onClick={() => dispatch(clear())}>Clear Cart</Button>
         </Top>
 
         <Bottom>
-          <Info>
-            {cart.products?.map((product) => (
-              <CartProduct key={product.data._id} product={product} />
-            ))}
-          </Info>
+          <Info>{cart.length ? cartItems : emptyCart}</Info>
           <Summary>
             <SummaryTitle>Order Summary</SummaryTitle>
             <SummaryItem>
@@ -74,7 +61,7 @@ const Cart = () => {
             <Button filled>Checkout</Button>
           </Summary>
         </Bottom>
-      </Content>
+      
     </Container>
   );
   return isLoading ? loading : component;

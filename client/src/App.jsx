@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/authentication/authentication.slice";
 import { getUser } from "./redux/authentication/authentication.selector";
 import { loadCart } from "./redux/cart/cart.thunk";
+import { Content } from "./responsive";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,7 +50,9 @@ function App() {
       <Navbar />
 
       <main>
+        <Content>
         <Routes />
+        </Content>
       </main>
       <Footer />
     </Router>
