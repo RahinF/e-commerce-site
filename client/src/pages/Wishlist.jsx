@@ -1,4 +1,3 @@
-import { Content } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { getWishlist } from "../redux/wishlist/wishlist.selector";
 import { useEffect, useState } from "react";
@@ -6,21 +5,51 @@ import { Product } from "../components/Product";
 import Button from "../components/Button";
 import { clear } from "../redux/wishlist/wishlist.slice";
 import axios from "axios";
+import styled from "styled-components";
+
+const Container = styled.div`
+  min-height: 60vh;
+`;
+
+const EmptyWishlist = styled.p`
+  display: flex;
+  justify-content: center;
+`;
+
+const ClearButton = styled(Button)`
+  margin-left: auto;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+`;
+
+const WishlistItems = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+`;
 
 const Wishlist = () => {
   const wishlist = useSelector(getWishlist);
   const dispatch = useDispatch();
 
-  const wishlistItems = wishlist.map((item) => <Item key={item} id={item} />);
+  const wishlistItems = (
+    <WishlistItems>
+      {wishlist.map((item) => (
+        <Item key={item} id={item} />
+      ))}
+    </WishlistItems>
+  );
 
-  const emptyWishlist = <div>Wishlist is empty</div>;
+  const emptyWishlist = <EmptyWishlist>Wishlist is empty</EmptyWishlist>;
 
   return (
-    <>
-      <h1>Wishlist</h1>
-      <Button onClick={() => dispatch(clear())}>clear</Button>
+    <Container>
+      <Title>Wishlist</Title>
+      <ClearButton onClick={() => dispatch(clear())}>clear</ClearButton>
       {wishlist.length ? wishlistItems : emptyWishlist}
-    </>
+    </Container>
   );
 };
 

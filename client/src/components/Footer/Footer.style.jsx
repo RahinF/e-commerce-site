@@ -4,7 +4,10 @@ import { Content, media } from "../../responsive";
 export const Container = styled(Content)`
   ${media("md", { display: "flex", padding: "1rem 0" })}
   padding: 1rem;
+  gap: 1rem;
 `;
+
+export const FooterContent = styled.div``;
 
 export const Left = styled.div`
   flex: 1;
@@ -25,11 +28,7 @@ export const SocialContainer = styled.div`
 `;
 
 export const SocialIcon = styled.div`
-  width: 40px;
-  height: 40px;
-  background-color: ${(props) => props.backgroundColor};
-  color: white;
-  border-radius: 50%;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;

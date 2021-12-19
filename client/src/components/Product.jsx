@@ -15,9 +15,7 @@ const ProductLink = styled(Link)`
 `;
 
 const Container = styled.div`
-  margin: auto;
-
-  width: calc(${breakpoints.xl} / 4);
+  width: calc(${breakpoints.xxl} / 5 - 1rem);
   padding: 1rem;
   background: #ececec;
 `;

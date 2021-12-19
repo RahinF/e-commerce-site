@@ -1,5 +1,4 @@
 import { ChevronLeftOutlined, ChevronRightOutlined } from "@mui/icons-material";
-import { slides } from "./data";
 import { useState } from "react";
 import Button from "../Button";
 import {
@@ -11,49 +10,48 @@ import {
   Slide,
   Content,
   Title,
-  Wrapper,
 } from "./Slider.style";
 
-const Slider = () => {
-  const [slideIndex, setSlideIndex] = useState(0);
+const Slider = ({ slides }) => {
+  const [current, setCurrent] = useState(0);
+  const length = slides.length;
 
-  const moveSlider = (direction) => {
-    const numberOfSlides = slides.length - 1;
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  };
 
-    if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : numberOfSlides);
-    } 
-    
-    else if (direction === "right") {
-      setSlideIndex(slideIndex < numberOfSlides ? slideIndex + 1 : 0);
-    }
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
   return (
     <Container>
-      <Arrow direction="left" onClick={() => moveSlider("left")}>
+      <Arrow direction="left" onClick={prevSlide}>
         <ChevronLeftOutlined />
       </Arrow>
-
-      <Wrapper slideIndex={slideIndex}>
-        {slides.map(({ id, title, description, image, backgroundColor }) => (
-          <Slide backgroundColor={backgroundColor} key={id}>
-            <ImageContainer>
-              <Image src={image} />
-            </ImageContainer>
-
-            <Content>
-              <Title>{title}</Title>
-              <Description>{description}</Description>
-              <Button>button</Button>
-            </Content>
-          </Slide>
-        ))}
-      </Wrapper>
-
-      <Arrow direction="right" onClick={() => moveSlider("right")}>
+      <Arrow direction="right" onClick={nextSlide}>
         <ChevronRightOutlined />
       </Arrow>
+
+      {slides.map(
+        (slide, index) =>
+          index === current && (
+            <Slide
+              backgroundColor={slide.backgroundColor}
+              key={slide.id}
+            >
+              <ImageContainer>
+                <Image src={slide.image} />
+              </ImageContainer>
+
+              <Content>
+                <Title>{slide.title}</Title>
+                <Description>{slide.description}</Description>
+                <Button>button</Button>
+              </Content>
+            </Slide>
+          )
+      )}
     </Container>
   );
 };

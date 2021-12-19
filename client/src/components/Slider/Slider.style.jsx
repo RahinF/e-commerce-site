@@ -2,34 +2,28 @@ import styled from "styled-components";
 import Button from "../Button";
 
 export const Container = styled.div`
-  height: 100vh;
-  width: 100%;
   position: relative;
-  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Arrow = styled(Button)`
   width: 50px;
   position: absolute;
-  left: ${(props) => props.direction === "left" && "10px"};
-  right: ${(props) => props.direction === "right" && "10px"};
+  left: ${({ direction }) => direction === "left" && "10px"};
+  right: ${({ direction }) => direction === "right" && "10px"};
   top: 50%;
   transform: translateY(-50%);
-`;
-
-export const Wrapper = styled.div`
-  height: 100%;
-  display: flex;
-  transition: 1s ease-in-out;
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 export const Slide = styled.div`
   display: flex;
   align-items: center;
   height: 100vh;
-  min-width: 100vw;
-  background-color: ${(props) => props.backgroundColor};
+  min-width: 100%;
+  background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 export const Content = styled.div`
@@ -59,3 +53,4 @@ export const ImageContainer = styled.div`
 export const Image = styled.img`
   height: 100%;
 `;
+

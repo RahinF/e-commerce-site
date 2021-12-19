@@ -3,10 +3,10 @@ import { data } from "./linkData";
 import {
   FavoriteBorder,
   PersonOutline,
+  PersonOutlineOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import { Badge, IconButton } from "@mui/material";
-import Button from "../Button";
 import { useSelector } from "react-redux";
 import { getUser } from "../../redux/authentication/authentication.selector";
 import {
@@ -29,60 +29,68 @@ const Navbar = () => {
   const cartQuantity = useSelector(getCartQuantity);
   const wishlistQuantity = useSelector(getWishlistQuantity);
 
+  const left = (
+    <Left>
+      <StyledLink to="/">
+        <Logo>Takt.</Logo>
+      </StyledLink>
+    </Left>
+  );
+
+  const center = (
+    <Center>
+      <Nav>
+        <LinkContainer>
+          {data.map(({ url, title }) => (
+            <LinkItem key={title}>
+              <StyledLink to={url}>{title}</StyledLink>
+            </LinkItem>
+          ))}
+        </LinkContainer>
+      </Nav>
+    </Center>
+  );
+
+  const right = (
+    <Right>
+      {loggedIn ? (
+        <Link to="/dashboard">
+          <IconButton>
+            <PersonOutline />
+          </IconButton>
+        </Link>
+      ) : (
+        <Link to="/login">
+          <IconButton>
+            <PersonOutlineOutlined />
+          </IconButton>
+        </Link>
+      )}
+
+      <Link to="/wishlist">
+        <IconButton>
+          <Badge color="secondary" badgeContent={wishlistQuantity}>
+            <FavoriteBorder />
+          </Badge>
+        </IconButton>
+      </Link>
+
+      <Link to="/cart">
+        <IconButton>
+          <Badge color="secondary" badgeContent={cartQuantity}>
+            <ShoppingCartOutlined />
+          </Badge>
+        </IconButton>
+      </Link>
+    </Right>
+  );
+
   return (
     <Container>
       <Wrapper>
-        <Left>
-          <StyledLink to="/">
-            <Logo>Takt.</Logo>
-          </StyledLink>
-        </Left>
-        <Center>
-          <Nav>
-            <LinkContainer>
-              {data.map(({ url, title }) => (
-                <LinkItem key={title}>
-                  <StyledLink to={url}>{title}</StyledLink>
-                </LinkItem>
-              ))}
-            </LinkContainer>
-          </Nav>
-        </Center>
-        <Right>
-          {loggedIn ? (
-            <Link to="/dashboard">
-              <IconButton>
-                <PersonOutline />
-              </IconButton>
-            </Link>
-          ) : (
-            <>
-              <StyledLink to="/login">
-                <Button filled>Login</Button>
-              </StyledLink>
-
-              <StyledLink to="/register">
-                <Button>Register</Button>
-              </StyledLink>
-            </>
-          )}
-
-          <Link to="/wishlist">
-            <IconButton>
-              <Badge color="secondary" badgeContent={wishlistQuantity}>
-                <FavoriteBorder />
-              </Badge>
-            </IconButton>
-          </Link>
-
-          <Link to="/cart">
-            <IconButton>
-              <Badge color="secondary" badgeContent={cartQuantity}>
-                <ShoppingCartOutlined />
-              </Badge>
-            </IconButton>
-          </Link>
-        </Right>
+        {left}
+        {center}
+        {right}
       </Wrapper>
     </Container>
   );

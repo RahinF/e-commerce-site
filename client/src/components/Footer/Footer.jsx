@@ -11,69 +11,67 @@ import {
   ContactContainer,
   ContactItem,
   Container,
-  Description,
   Left,
   List,
   ListItem,
-  Logo,
   Right,
   SocialContainer,
   SocialIcon,
   Title,
 } from "./Footer.style";
 import Newsletter from "../Newsletter";
+import { Content } from "../../responsive";
 
 const Footer = () => {
   return (
     <footer>
-      <Container>
-        <Left>
-        <Newsletter />
-          <Description>
-           
-          </Description>
-          <SocialContainer>
-            <SocialIcon backgroundColor="#4267B2">
-              <Facebook />
-            </SocialIcon>
-            <SocialIcon backgroundColor="#833AB4">
-              <Instagram />
-            </SocialIcon>
-            <SocialIcon backgroundColor="#1DA1F2">
-              <Twitter />
-            </SocialIcon>
-          </SocialContainer>
-          
-        </Left>
-        <Center>
-          <Title>Useful Links</Title>
-          <List>
-            <ListItem>Home</ListItem>
-            <ListItem>Cart</ListItem>
-            <ListItem>Men's Fashion</ListItem>
-            <ListItem>Women's Fashion</ListItem>
-            <ListItem>Accessories</ListItem>
-            <ListItem>My Account</ListItem>
-            <ListItem>Wishlist</ListItem>
-            <ListItem>Shipping</ListItem>
-          </List>
-        </Center>
-        <Right>
-          <Title>Contact</Title>
-          <ContactContainer>
-            <Room />
-            <ContactItem>62 Parkes Road, Melbourne, VIC, 3000</ContactItem>
-          </ContactContainer>
-          <ContactContainer>
-            <Phone />
-            <ContactItem>(03) 8100 5534</ContactItem>
-          </ContactContainer>
-          <ContactContainer>
-            <Email />
-            <ContactItem>contact@takt.dev</ContactItem>
-          </ContactContainer>
-        </Right>
-      </Container>
+      <Content>
+        <Container>
+          <Left>
+            <Newsletter />
+            <Title>Socials</Title>
+            <SocialContainer>
+              <SocialIcon>
+                <Facebook />
+              </SocialIcon>
+              <SocialIcon>
+                <Instagram />
+              </SocialIcon>
+              <SocialIcon>
+                <Twitter />
+              </SocialIcon>
+            </SocialContainer>
+          </Left>
+          <Center>
+            <Title>Useful Links</Title>
+            <List>
+              <ListItem>Home</ListItem>
+              <ListItem>Cart</ListItem>
+              <ListItem>Men's Fashion</ListItem>
+              <ListItem>Women's Fashion</ListItem>
+              <ListItem>Accessories</ListItem>
+              <ListItem>My Account</ListItem>
+              <ListItem>Wishlist</ListItem>
+              <ListItem>Shipping</ListItem>
+            </List>
+          </Center>
+          <Right>
+            <Title>Contact</Title>
+            <ContactContainer>
+              <Room />
+              <ContactItem>62 Parkes Road, Melbourne, VIC, 3000</ContactItem>
+            </ContactContainer>
+            <ContactContainer>
+              <Phone />
+              <ContactItem>(03) 8100 5534</ContactItem>
+            </ContactContainer>
+            <ContactContainer>
+              <Email />
+              <ContactItem>contact@takt.dev</ContactItem>
+            </ContactContainer>
+          </Right>
+        </Container>
+      </Content>
     </footer>
   );
 };

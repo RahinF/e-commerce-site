@@ -6,7 +6,7 @@ export const breakpoints = {
   md: "768px", // tablet
   lg: "992px",
   xl: "1200px",
-  xxl: "1400px",
+  xxl: "1500px",
 };
 
 export const media = (size, props) => {

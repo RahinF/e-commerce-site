@@ -9,6 +9,7 @@ const InputContainer = styled.div`
   display: flex;
   border: 1px solid transparent;
   transition: 0.25s ease;
+  width: 100%;
 
   &:focus-within {
     border-color: black;
@@ -16,6 +17,7 @@ const InputContainer = styled.div`
 `;
 
 const Input = styled.input`
+  flex: 1;
   padding: 0.75rem 1rem;
   width: 100%;
   border: 1px solid #e8e8e1;
@@ -30,9 +32,13 @@ const Input = styled.input`
   }
 `;
 
-const Title = styled.h5`
+const SubmitButton = styled(Button)`
+  flex: 0;
+  padding: 0.5rem 1rem;
+`;
+
+const Title = styled.h3`
   font-size: 1.5rem;
-  margin: 0;
 `;
 
 const ErrorMessage = styled.p`
@@ -55,10 +61,10 @@ const Newsletter = () => {
 
   return (
     <Container>
-      <Title>Sign up for Newsletter</Title>
+      <Title>Newsletter</Title>
       <p>
-        We will let you know when we have new arrivals, events and promo's don't
-        worry we send them infrequently, just a friendly hi now and again!
+        Subscribe to get special offers, free giveaways, and once-in-a-lifetime
+        deals.
       </p>
       <ErrorMessage>{error}</ErrorMessage>
 
@@ -69,9 +75,9 @@ const Newsletter = () => {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
-        <Button filled onClick={onSubmit}>
+        <SubmitButton filled onClick={onSubmit}>
           <Send />
-        </Button>
+        </SubmitButton>
       </InputContainer>
     </Container>
   );

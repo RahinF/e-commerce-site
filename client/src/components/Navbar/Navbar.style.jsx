@@ -38,6 +38,7 @@ export const LinkContainer = styled.ul`
 
 export const LinkItem = styled.li`
   list-style: none;
+  text-transform: uppercase;
 `;
 
 export const StyledLink = styled(Link)`
